@@ -9,9 +9,10 @@ def test_negative_value_returns_validation_failure(input_validator):
         input_validator.validate("meter", "-1")
 
 
-def test_unregistered_unit_inch_returns_validation_failure():
+def test_unregistered_unit_inch_returns_validation_failure(input_validator):
     # Test ID: T-LOGIC-004 | InputValidator | unit inch (미등록) → 검증 실패
-    pytest.fail("RED skeleton T-LOGIC-004")
+    with pytest.raises(ValidationError):
+        input_validator.validate("inch", "5")
 
 
 def test_invalid_number_abc_returns_validation_failure():

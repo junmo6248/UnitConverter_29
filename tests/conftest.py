@@ -9,10 +9,17 @@ if str(SRC) not in sys.path:
 
 
 @pytest.fixture
-def input_validator():
+def conversion_registry():
+    from domain.conversion_registry import ConversionRegistry
+
+    return ConversionRegistry()
+
+
+@pytest.fixture
+def input_validator(conversion_registry):
     from domain.input_validator import InputValidator
 
-    return InputValidator()
+    return InputValidator(conversion_registry)
 
 
 @pytest.fixture
