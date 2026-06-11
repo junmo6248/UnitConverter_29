@@ -24,4 +24,6 @@ def input_validator(conversion_registry):
 
 @pytest.fixture
 def input_parser():
-    """Track A — InputParser. 본문은 /tdd-red."""
+    from boundary.input_parser import InputParser
+
+    return InputParser()
