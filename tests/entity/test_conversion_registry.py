@@ -11,7 +11,13 @@ def test_meter_is_registered(conversion_registry):
 
 def test_register_cubit_enables_conversion():
     # Test ID: T-LOGIC-005 | ConversionRegistry | register("cubit", 0.4572) → cubit 변환 가능
-    pytest.fail("RED skeleton T-LOGIC-005")
+    registry = ConversionRegistry()
+    registry.register("cubit", 0.4572)
+    converter = LengthConverter(registry)
+
+    results = converter.convert_all(1, "cubit")
+
+    assert results["meter"] == pytest.approx(0.4572)
 
 
 def test_register_cubit_makes_unit_registered(conversion_registry):
