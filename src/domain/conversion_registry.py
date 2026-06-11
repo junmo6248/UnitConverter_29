@@ -17,3 +17,6 @@ class ConversionRegistry:
 
     def get_to_meter_factor(self, unit: str) -> float:
         return self._to_meter[unit]
+
+    def register(self, unit: str, to_meter_factor: float) -> None:
+        self._to_meter[unit] = to_meter_factor
