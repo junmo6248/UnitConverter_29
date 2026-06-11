@@ -10,6 +10,10 @@ class InputValidator:
         if not self._registry.is_registered(unit):
             raise ValidationError(f"Unknown unit: {unit}")
 
-        value = float(value_str)
+        try:
+            value = float(value_str)
+        except ValueError:
+            raise ValidationError(f"Invalid number: {value_str}") from None
+
         if value < 0:
             raise ValidationError("Negative value not allowed")
