@@ -1,0 +1,46 @@
+import pytest
+
+from boundary.input.command_parser import InputCommandParser
+from boundary.input.commands import ConvertCommand
+
+
+@pytest.fixture
+def command_parser():
+    return InputCommandParser()
+
+
+def test_convert_command_with_json_prefix_parses_format_and_unit_value(
+    command_parser,
+):
+    # Test ID: T-UI-018 | InputCommandParser | "json:meter:2.5" → format=json, unit=meter, value=2.5
+    command = command_parser.parse("json:meter:2.5")
+
+    assert isinstance(command, ConvertCommand)
+    assert command.format == "json"
+    assert command.unit == "meter"
+    assert command.value_str == "2.5"
+
+
+def test_convert_command_default_format_is_text_when_no_prefix(command_parser):
+    # Test ID: T-UI-019 | InputCommandParser | "meter:2.5" → format=text (기본값)
+    command = command_parser.parse("meter:2.5")
+
+    assert isinstance(command, ConvertCommand)
+    assert command.format == "text"
+    assert command.unit == "meter"
+    assert command.value_str == "2.5"
+
+
+def test_cli_controller_json_format_outputs_valid_json():
+    # Test ID: T-UI-020 | CliController | json:meter:2.5 → JSON 출력
+    pytest.fail("RED skeleton T-UI-020")
+
+
+def test_cli_controller_csv_format_outputs_csv_header():
+    # Test ID: T-UI-021 | CliController | csv:meter:2.5 → CSV 출력
+    pytest.fail("RED skeleton T-UI-021")
+
+
+def test_cli_controller_text_format_outputs_line_table():
+    # Test ID: T-UI-022 | CliController | text:meter:2.5 → 표 형태 줄 출력 (기존 TextFormatter)
+    pytest.fail("RED skeleton T-UI-022")
