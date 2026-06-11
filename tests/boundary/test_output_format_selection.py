@@ -1,5 +1,8 @@
+import json
+
 import pytest
 
+from application.app_factory import create_app
 from boundary.input.command_parser import InputCommandParser
 from boundary.input.commands import ConvertCommand
 
@@ -33,14 +36,35 @@ def test_convert_command_default_format_is_text_when_no_prefix(command_parser):
 
 def test_cli_controller_json_format_outputs_valid_json():
     # Test ID: T-UI-020 | CliController | json:meter:2.5 → JSON 출력
-    pytest.fail("RED skeleton T-UI-020")
+    app = create_app()
+
+    result = app.controller.run_once("json:meter:2.5")
+    parsed = json.loads(result)
+
+    assert parsed["source"] == {"unit": "meter", "value": 2.5}
+    assert parsed["results"]["meter"] == pytest.approx(2.5)
+    assert parsed["results"]["feet"] == pytest.approx(8.2021, rel=1e-3)
 
 
 def test_cli_controller_csv_format_outputs_csv_header():
     # Test ID: T-UI-021 | CliController | csv:meter:2.5 → CSV 출력
-    pytest.fail("RED skeleton T-UI-021")
+    app = create_app()
+
+    result = app.controller.run_once("csv:meter:2.5")
+
+    assert result.startswith(
+        "source_unit,source_value,result_unit,result_value"
+    )
+    assert "meter,2.5,feet," in result
 
 
 def test_cli_controller_text_format_outputs_line_table():
     # Test ID: T-UI-022 | CliController | text:meter:2.5 → 표 형태 줄 출력 (기존 TextFormatter)
-    pytest.fail("RED skeleton T-UI-022")
+    app = create_app()
+
+    result = app.controller.run_once("text:meter:2.5")
+
+    assert "2.5 meter = 2.5 meter" in result
+    assert "2.5 meter =" in result
+    assert "feet" in result
+    assert "yard" in result
