@@ -23,6 +23,13 @@ def input_validator(conversion_registry):
 
 
 @pytest.fixture
+def length_converter(conversion_registry):
+    from domain.length_converter import LengthConverter
+
+    return LengthConverter(conversion_registry)
+
+
+@pytest.fixture
 def input_parser():
     from boundary.input_parser import InputParser
 
