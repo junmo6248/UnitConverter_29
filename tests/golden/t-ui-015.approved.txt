@@ -1,0 +1,3 @@
+ok
+format=csv
+formatter_type=CsvFormatter

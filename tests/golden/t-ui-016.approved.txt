@@ -1,0 +1,3 @@
+ok
+format=text
+formatter_type=TextFormatter

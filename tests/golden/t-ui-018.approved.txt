@@ -1,0 +1,4 @@
+ok
+format=json
+unit=meter
+value_str=2.5

@@ -1,0 +1,3 @@
+ok
+unit=meter
+value_str=2.5:extra

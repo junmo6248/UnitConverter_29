@@ -1,0 +1,2 @@
+ok
+result=Registered: 1 cubit = 0.4572 meter

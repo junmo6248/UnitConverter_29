@@ -1,4 +1,7 @@
-class TextFormatter:
+from boundary.output.output_formatter import OutputFormatter
+
+
+class TextFormatter(OutputFormatter):
     def format(
         self, source_unit: str, source_value: float, results: dict[str, float]
     ) -> str:

@@ -1,13 +1,17 @@
-from domain.constants import FEET_TO_METER, YARD_TO_METER
+from infrastructure.config_loader import ConfigLoader
 
 
 class ConversionRegistry:
-    def __init__(self) -> None:
-        self._to_meter = {
-            "meter": 1.0,
-            "feet": FEET_TO_METER,
-            "yard": YARD_TO_METER,
-        }
+    def __init__(
+        self,
+        units_to_meter: dict[str, float] | None = None,
+        config_loader: ConfigLoader | None = None,
+    ) -> None:
+        if units_to_meter is not None:
+            self._to_meter = dict(units_to_meter)
+        else:
+            loader = config_loader or ConfigLoader()
+            self._to_meter = loader.load_units_to_meter()
 
     def is_registered(self, unit: str) -> bool:
         return unit in self._to_meter

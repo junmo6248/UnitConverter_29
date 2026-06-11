@@ -1,0 +1,4 @@
+validation_error
+code=negative_value
+unit=meter
+value_str=-1

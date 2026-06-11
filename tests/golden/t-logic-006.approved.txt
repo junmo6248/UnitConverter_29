@@ -1,0 +1,4 @@
+validation_error
+code=invalid_number
+unit=meter
+value_str=abc

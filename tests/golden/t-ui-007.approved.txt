@@ -1,0 +1,3 @@
+ok
+unit=
+value_str=2.5

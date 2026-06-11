@@ -1,0 +1,8 @@
+{
+  "base_unit": "meter",
+  "units_to_meter": {
+    "meter": 1.0,
+    "feet": 0.30479973806299395,
+    "yard": 0.914402915849983
+  }
+}

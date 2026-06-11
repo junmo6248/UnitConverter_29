@@ -1,4 +1,4 @@
-from boundary.errors import ParseError
+from boundary.input.errors import ParseError
 
 
 class InputParser:

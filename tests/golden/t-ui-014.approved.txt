@@ -1,0 +1,3 @@
+ok
+format=json
+formatter_type=JsonFormatter
