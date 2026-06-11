@@ -1,5 +1,8 @@
+import json
+
 import pytest
 
+from boundary.json_formatter import JsonFormatter
 from boundary.text_formatter import TextFormatter
 
 
@@ -19,4 +22,11 @@ def test_text_formatter_line_output():
 
 def test_json_formatter_valid_json():
     # Test ID: T-UI-004 | JsonFormatter | 변환 결과 dict → 유효한 JSON
-    pytest.fail("RED skeleton T-UI-004")
+    formatter = JsonFormatter()
+    results = {"meter": 2.5, "feet": 8.2021}
+
+    output = formatter.format("meter", 2.5, results)
+    parsed = json.loads(output)
+
+    assert parsed["source"] == {"unit": "meter", "value": 2.5}
+    assert parsed["results"] == results
