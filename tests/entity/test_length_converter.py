@@ -10,6 +10,8 @@ def test_meter_2_5_converts_to_all_units_accurately(length_converter):
     assert results["yard"] == pytest.approx(2.734025, rel=1e-3)
 
 
-def test_feet_10_converts_to_meter_accurately():
+def test_feet_10_converts_to_meter_accurately(length_converter):
     # Test ID: T-LOGIC-002 | LengthConverter | feet:10 → meter 3.048…
-    pytest.fail("RED skeleton T-LOGIC-002")
+    results = length_converter.convert_all(10, "feet")
+
+    assert results["meter"] == pytest.approx(3.048, rel=1e-3)
